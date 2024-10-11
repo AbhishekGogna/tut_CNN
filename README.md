@@ -1,4 +1,4 @@
-# ms_vincent
+# Tutorial for runnning a CNN for genomic preidiction
 
 This project extends Convolutional Neural Networks (CNNs) to Big Data, particularly focusing on genomic predictions with **BGLR**. Below are the steps and requirements for setting up the necessary computing environment using **OpenBLAS** and **Python** inside containers.
 
