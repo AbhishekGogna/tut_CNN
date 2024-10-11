@@ -87,3 +87,14 @@ To set up the Python environment inside the container, follow these steps:
 ---
 
 This setup will ensure you have a reproducible environment for your project, including all necessary dependencies for both genomic predictions with BGLR and machine learning tasks.
+
+## Using this directory
+
+Try to run the command in a terminal inside the container
+
+    ```bash
+    cd /proj/run/Py
+    doit
+    ```
+This should work and output "works" on your terminal 
+
