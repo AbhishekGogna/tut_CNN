@@ -105,10 +105,11 @@ This setup will ensure you have a reproducible environment for your project, inc
 
 ## Using this directory
 
-Try to run the command in a terminal inside the container
-    ```bash
-    cd /proj/run/Py
-    doit
-    ```
-This should work and output "works" on your terminal 
+1.  Try to run the command in a terminal inside the container
+        ```bash
+        cd /proj/run/Py
+        doit
+        ```
+    This should work and output "works" on your terminal 
 
+2.  Try running the notebook file in notebooks directory. 
