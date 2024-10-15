@@ -18,10 +18,11 @@ thisdir=$PWD
 ext_lib_blas="/qg-10/data/AGR-QG/Gogna/computing_containers/openblas_3.23/inst/qg-10.ipk-gatersleben.de/lib/libopenblas.so"
 
 perm_bindings="/opt/Bio/cmake/3.12.1:/opt/local/cmake, \
+/filer-5/agruppen/QG/abhi_ravi:/proj/ext_dir/data_ravi:ro, \
 /opt/Bio/jdk/11.0.18:/usr/lib/jvm/java-11-openjdk-amd64"
 
-cc_dir="/qg-10/data/AGR-QG/Gogna/computing_containers/containers"
-usr_scr="/qg-10/data/AGR-QG/Gogna/computing_containers/usr_scr"
+cc_dir="/filer-5/agruppen/QG/gogna/computing_containers/containers"
+usr_scr="/filer-5/agruppen/QG/gogna/computing_containers/usr_scr"
 def_cc="cc_jup_rst_v3.sif"
 
 ## For instance: Auto generated
