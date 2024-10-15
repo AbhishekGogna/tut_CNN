@@ -2,6 +2,13 @@
 
 This project extends Convolutional Neural Networks (CNNs) to Big Data, particularly focusing on genomic predictions with **BGLR**. Below are the steps and requirements for setting up the necessary computing environment using **OpenBLAS** and **Python** inside containers.
 
+## First steps
+Clone this repository and ty running    
+     ```bash
+    ./manage_cc help
+    ```
+This call to the script will try to find a container and associated scripts at /filer-5/agruppen/QG/gogna. If this is not found you will get an error. See requirements section below for a solution to this. 
+
 ## Requirements
 Ensure that you have access to the container. I put one at /filer-5/agruppen/QG/gogna. 
 
@@ -9,6 +16,12 @@ In addition, ensure the following paths are correctly set up:
 - `cc_dir="../computing_containers/containers"`
 - `usr_scr="../computing_containers/usr_scr"`
 - `ext_lib_blas="../computing_containers/openblas_3.23/inst/qg-10.ipk-gatersleben.de/lib/libopenblas.so"` # see below
+
+In case you did not set up BLAS (next section), i suggest you put "#" in front of line 18 in manage_cc. You can use 
+     ```bash
+    nano manage_cc
+    ```
+to edit the script in the terminal itself.
 
 ## OpenBLAS Setup
 
