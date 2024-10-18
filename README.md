@@ -67,8 +67,8 @@ To set up the Python environment inside the container, follow these steps:
 1. Run the following command inside the container to create a requirements file:
     ```bash
     echo -e "## for DL\n\
-    tensorflow==2.10.1\n\
-    tensorboard==2.10.1\n\
+    tensorflow==2.8\n\
+    tensorboard==2.8\n\
     pyarrow==5.0.0\n\
     matplotlib==3.5.1\n\
     pandas==1.4\n\
