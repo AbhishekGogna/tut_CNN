@@ -23,3 +23,26 @@ import matplotlib.pyplot as plt
 #import pydot
 from pprint import pformat
 from datetime import datetime
+
+## Predictions
+from sklearn.model_selection import KFold, train_test_split, StratifiedKFold, cross_val_score
+from sklearn.preprocessing import MinMaxScaler
+from scipy.stats import pearsonr
+import tensorflow as tf
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras import Model
+from tensorflow.keras.layers import Dense, Dropout, Conv1D, add, Flatten, LSTM, AveragePooling1D, concatenate, MaxPool1D, BatchNormalization, Reshape, Activation
+from tensorflow.keras.callbacks import EarlyStopping, Callback, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
+from tensorflow.keras.regularizers import l1, l2, L1L2
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras import backend as K
+from tensorflow.keras import Input
+from tensorflow.keras.utils import plot_model 
+from tensorboard.plugins.hparams import api as hp
+import keras_tuner as kt
+
+## feature importance 
+from xgboost import XGBClassifier
+from xgboost import plot_importance
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt

@@ -13,10 +13,17 @@ This call to the script will try to find a container and associated scripts at /
 ## Requirements
 Ensure that you have access to the container. I put one at /filer-5/agruppen/QG/gogna. 
 
-In addition, ensure the following paths are correctly set up:
+In addition, ensure the following paths are correctly set up in manage_cc:
 - `cc_dir="../computing_containers/containers"`
 - `usr_scr="../computing_containers/usr_scr"`
 - `ext_lib_blas="../computing_containers/openblas_3.23/inst/qg-10.ipk-gatersleben.de/lib/libopenblas.so"` # see below
+
+Lastly, you need to create a directory for storing large volume files at /qg-10/data/AGR-QG/temp. Modify this path at line 21 in manage_cc. Easiest way to do this is
+    ```bash
+    usr_name=$(whoami)
+    mkdir /qg-10/data/AGR-QG/temp/${usr_name}/tut_CNN
+    cd OpenBLAS
+    ```
 
 In case you did not set up BLAS (next section), i suggest you put "#" in front of line 18 in manage_cc. You can use 
      ```bash

@@ -18,6 +18,7 @@ thisdir=$PWD
 ext_lib_blas="/qg-10/data/AGR-QG/Gogna/computing_containers/openblas_3.23/inst/qg-10.ipk-gatersleben.de/lib/libopenblas.so"
 
 perm_bindings="/opt/Bio/cmake/3.12.1:/opt/local/cmake, \
+/qg-10/data/AGR-QG/temp/Gogna/tut_CNN:/proj/tmp_data, \
 /filer-5/agruppen/QG/abhi_ravi:/proj/ext_dir/data_ravi:ro, \
 /opt/Bio/jdk/11.0.18:/usr/lib/jvm/java-11-openjdk-amd64"
 
@@ -85,8 +86,6 @@ start_instance(){
 
 	## Add permanent bindings 
 	if [[ ! -z "${perm_bindings}" ]];	then	bindings="${bindings},${perm_bindings}";	fi
-
-	echo "Bindings: ${bindings}"
 
 	# start instance
 	singularity instance start --nv \
