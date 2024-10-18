@@ -103,7 +103,7 @@ To set up the Python environment inside the container, follow these steps:
     ```bash
     python3 -m ipykernel install --user --name=py_env
     ```
-Note: You may need to run this agian and referh if the notebook does not detect your kernel (see step 5.). 
+   Note: You may need to run this agian and referh if the notebook does not detect your kernel (see step 5.). 
 
 5. Refresh Jupyter and select `py_env` from the kernel dropdown in the top-right corner of the notebook.
 
