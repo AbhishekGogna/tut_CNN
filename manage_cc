@@ -86,6 +86,8 @@ start_instance(){
 	## Add permanent bindings 
 	if [[ ! -z "${perm_bindings}" ]];	then	bindings="${bindings},${perm_bindings}";	fi
 
+	echo "Bindings: ${bindings}"
+
 	# start instance
 	singularity instance start --nv \
 		--contain \

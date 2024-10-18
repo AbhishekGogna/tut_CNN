@@ -66,13 +66,20 @@ To set up the Python environment inside the container, follow these steps:
 
 1. Run the following command inside the container to create a requirements file:
     ```bash
-    echo -e "## for plots\n\
+    echo -e "## for DL\n\
+    tensorflow==2.10.1\n\
+    tensorboard==2.10.1\n\
+    pyarrow==5.0.0\n\
     matplotlib==3.5.1\n\
-    ## for jupyter notebooks\n\
+    pandas==1.4\n\
+    scikit-learn==1.0.2\n\
+    patsy==0.5.2\n\
+    protobuf==3.19.6\n\
+    keras-tuner==1.1.3\n\
     ipykernel==6.22.0\n\
     ## for ML\n\
     xgboost==2.0.0\n\
-    ## for reproducible code\n\
+    ## for doit\n\
     graphviz==0.20\n\
     doit==0.36.0\n\
     pygraphviz==1.9\n\
@@ -96,6 +103,7 @@ To set up the Python environment inside the container, follow these steps:
     ```bash
     python3 -m ipykernel install --user --name=py_env
     ```
+Note: You may need to run this agian and referh if the notebook does not detect your kernel (see step 5.). 
 
 5. Refresh Jupyter and select `py_env` from the kernel dropdown in the top-right corner of the notebook.
 
