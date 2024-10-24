@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 # load functions -------------------------------------------------------------------------
-import sys
-source_code_at = '/proj/src'
-sys.path.append(source_code_at)
-from Py.libs import *
-from Py.func import *
+try:
+    # Specify the source code path
+    source_code_at = '/proj/src'
+    sys.path.append(source_code_at)
+
+    # Attempt to import modules
+    from Py.libs import *
+    from Py.func import *
+
+    # If everything works fine, print "works"
+    print("works")
+
+except Exception as e:
+    # If there is an error, print the error message
+    print(f"Error: {e}")
 
 proj_paths = read_json("/proj/inputs/core_paths.json")
 
