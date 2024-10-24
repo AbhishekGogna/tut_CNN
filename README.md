@@ -22,7 +22,6 @@ Lastly, you need to create a directory for storing large volume files at /qg-10/
     ```bash
     usr_name=$(whoami)
     mkdir /qg-10/data/AGR-QG/temp/${usr_name}/tut_CNN
-    cd OpenBLAS
     ```
 
 In case you did not set up BLAS (next section), i suggest you put "#" in front of line 18 in manage_cc. You can use 
@@ -30,6 +29,22 @@ In case you did not set up BLAS (next section), i suggest you put "#" in front o
     nano manage_cc
     ```
 to edit the script in the terminal itself.
+
+## Starting the container
+
+By starting the container i mean the start of jupyter server. This is possible with
+     ```bash
+    ./manage_cc start_jup
+    ```
+   This creates a directory cc_data where all the data/files associated with the session are present. For instance, the token for settign up jupyter password is present in
+    ```bash
+    ./cc_data/jup/{session_name}/run.err
+    ```
+session name, e.g. jup_tut_CNN_xx is output on the terminal when you start the container. An address to access the container is also printed, e.g. 127.0.0.1:8026. To access the container you need to access this address using a web browser like chrome. 
+
+For safety reasons, you need to set up a tunnel (read more at https://github.com/IPK-QG/bench_setup/blob/master/docs/computing-clusters.md). I would prefer using MobaXterm for this over putty for ease of use. A portable version is available at https://mobaxterm.mobatek.net/download-home-edition.html. You can start it by simply running the .exe file and then start a session at qg-10/slurm using the "session" button on top left corner. Also close to the session button, a tunneling button is available. Use this to set up a tunnel with following specs but with your user name,   
+![image](https://github.com/user-attachments/assets/f41f76d8-b22f-49d0-9396-b74d222a020f)
+
 
 ## OpenBLAS Setup
 
