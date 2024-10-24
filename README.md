@@ -36,13 +36,18 @@ By starting the container i mean the start of jupyter server. This is possible w
      ```bash
     ./manage_cc start_jup
     ```
-   This creates a directory cc_data where all the data/files associated with the session are present. For instance, the token for settign up jupyter password is present in
-    ```bash
-    ./cc_data/jup/{session_name}/run.err
-    ```
-session name, e.g. jup_tut_CNN_xx is output on the terminal when you start the container. An address to access the container is also printed, e.g. 127.0.0.1:8026. To access the container you need to access this address using a web browser like chrome. 
+This command:
+- Creates a directory called cc_data containing all session files
+- Outputs a session name (e.g. jup_tut_CNN_xx) to the terminal
+- Displays an access address (e.g. 127.0.0.1:xxxx) to access the server using a web browser like chrome
+- Stores the Jupyter password token in ./cc_data/jup/{session_name}/run.err
 
-For safety reasons, you need to set up a tunnel (read more at https://github.com/IPK-QG/bench_setup/blob/master/docs/computing-clusters.md). I would prefer using MobaXterm for this over putty for ease of use. A portable version is available at https://mobaxterm.mobatek.net/download-home-edition.html. You can start it by simply running the .exe file and then start a session at qg-10/slurm using the "session" button on top left corner. Also close to the session button, a tunneling button is available. Use this to set up a tunnel with following specs but with your user name,   
+For safety reasons, you need to set up a tunnel (read more at https://github.com/IPK-QG/bench_setup/blob/master/docs/computing-clusters.md). For the tunnel setup, I prefer using MobaXterm:
+- Download the portable version from MobaXterm's website (https://mobaxterm.mobatek.net/download-home-edition.html)
+- Launch the .exe file
+- Click the "Session" button in the top left corner to connect to qg-10 for example 
+- Create a new session connecting to qg-10/slurm
+- Use the "Tunneling" button (near the Session button) to configure your tunnel with your username
 ![image](https://github.com/user-attachments/assets/f41f76d8-b22f-49d0-9396-b74d222a020f)
 
 
@@ -50,7 +55,7 @@ For safety reasons, you need to set up a tunnel (read more at https://github.com
 
 **OpenBLAS** is required when running genomic predictions with **BGLR**. Follow these steps to install and configure OpenBLAS:
 
-1. Start a shell session in the container.
+1. Start a shell session in the container. For this you need to access the jupyter server as before and go to File -> New -> Terminal to start the shell session
 2. Clone the OpenBLAS repository:
     ```bash
     git clone -b v0.3.23 https://github.com/xianyi/OpenBLAS
