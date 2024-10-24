@@ -47,7 +47,7 @@ For safety reasons, you need to set up a tunnel (read more at https://github.com
 - Launch the .exe file
 - Click the "Session" button in the top left corner to connect to qg-10 for example 
 - Create a new session connecting to qg-10/slurm
-- Use the "Tunneling" button (near the Session button) to configure your tunnel with your username
+- Use the "Tunneling" button (near the Session button) to configure your tunnel with your username and port address(es) as output when starting the container (xxxx from 127.0.0.1:xxxx)
 ![image](https://github.com/user-attachments/assets/f41f76d8-b22f-49d0-9396-b74d222a020f)
 
 
