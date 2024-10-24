@@ -19,23 +19,23 @@ In addition, ensure the following paths are correctly set up in manage_cc:
 - `ext_lib_blas="../computing_containers/openblas_3.23/inst/qg-10.ipk-gatersleben.de/lib/libopenblas.so"` # see below
 
 Lastly, you need to create a directory for storing large volume files at /qg-10/data/AGR-QG/temp. Modify this path at line 21 in manage_cc. Easiest way to do this is
-    ```bash
-    usr_name=$(whoami)
-    mkdir /qg-10/data/AGR-QG/temp/${usr_name}/tut_CNN
-    ```
+     ```bash
+     usr_name=$(whoami)
+     mkdir /qg-10/data/AGR-QG/temp/${usr_name}/tut_CNN
+     ```
 
 In case you did not set up BLAS (next section), i suggest you put "#" in front of line 18 in manage_cc. You can use 
      ```bash
-    nano manage_cc
-    ```
+     nano manage_cc
+     ```
 to edit the script in the terminal itself.
 
 ## Starting the container
 
 By starting the container i mean the start of jupyter server. This is possible with
      ```bash
-    ./manage_cc start_jup
-    ```
+     ./manage_cc start_jup
+     ```
 This command:
 - Creates a directory called cc_data containing all session files
 - Outputs a session name (e.g. jup_tut_CNN_xx) to the terminal
