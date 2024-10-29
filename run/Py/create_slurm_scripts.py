@@ -17,8 +17,9 @@ out_paths = input_paths # so that more keys-value pairs are appneded to an exist
 out_paths['base_folder'] = f'{save_at}'
 out_paths['pred_dirs_paths'] = f'{save_at}/pred_dirs_paths.json'
 out_paths['master_script_path'] = f'{save_at}/master_script_paths.txt'
-parent_dir = "/qg-10/data/AGR-QG/Gogna/tutorials" # would need to be modified
+usr = "Gogna" # would need to be modified
 project_name = "tut_CNN" # name of the project at parent_dir
+parent_dir = '/qg-10/data/AGR-QG/{usr}/tutorials'
 
 # Produce data ---------------------------------------------------------------------------------------------------------------------
 chunk_1 = '''#!/usr/bin/env bash
@@ -93,8 +94,8 @@ for jobs in slurm_jobs_df.index:
         run_dir = f'{base_dir}/{key}'
         script_name = f'{run_dir}/run_script_{run}'
         script_path = f'{script_name}.sh' # puts a script in the previous folder    
-        ext_hp_tuning = f'/qg-10/data/AGR-QG/temp/Gogna/{project_name}/{model}_{run_name}/{key}'
-        int_hp_tuning = ext_hp_tuning.replace(f'/qg-10/data/AGR-QG/temp/Gogna/{project_name}', "/proj/tmp_data")
+        ext_hp_tuning = f'/qg-10/data/AGR-QG/temp/{usr}/{project_name}/{model}_{run_name}/{key}'
+        int_hp_tuning = ext_hp_tuning.replace(f'/qg-10/data/AGR-QG/temp/{usr}/{project_name}', "/proj/tmp_data")
         
         if not os.path.exists(int_hp_tuning):
             os.makedirs(int_hp_tuning)
@@ -130,13 +131,13 @@ for jobs in slurm_jobs_df.index:
             with open (master_script_path, 'w') as rsh:
                 rsh.write('#!/usr/bin/env bash \n')
                 rsh.write(f'if [ -f {slurm_id_at} ] ; then rm {slurm_id_at} ; fi \n')
-                rsh.write(f'sbatch --auks=yes --job-name={job_name} --mem={mem}G -c 1 -p gpu -x "{node_list}" --gres=gpu:1 --time={slurm_time} --mail-type=FAIL --mail-user=gogna@ipk-gatersleben.de -o {stdout} -e {stderr} --wrap="{script_path_abs}" & \n')
+                rsh.write(f'sbatch --auks=yes --job-name={job_name} --mem={mem}G -c 1 -p gpu -x "{node_list}" --gres=gpu:1 --time={slurm_time} --mail-type=FAIL --mail-user={usr}@ipk-gatersleben.de -o {stdout} -e {stderr} --wrap="{script_path_abs}" & \n')
         elif (run >0) and (run < (len(data)-1)):
             with open (master_script_path, 'a+') as rsh:
-                rsh.write(f'sbatch --auks=yes --job-name={job_name} --mem={mem}G -c 1 -p gpu -x "{node_list}" --gres=gpu:1 --time={slurm_time} --mail-type=FAIL --mail-user=gogna@ipk-gatersleben.de -o {stdout} -e {stderr} --wrap="{script_path_abs}" & \n')
+                rsh.write(f'sbatch --auks=yes --job-name={job_name} --mem={mem}G -c 1 -p gpu -x "{node_list}" --gres=gpu:1 --time={slurm_time} --mail-type=FAIL --mail-user={usr}@ipk-gatersleben.de -o {stdout} -e {stderr} --wrap="{script_path_abs}" & \n')
         elif run == (len(data)-1):
             with open (master_script_path, 'a+') as rsh:
-                rsh.write(f'sbatch --auks=yes --job-name={job_name} --mem={mem}G -c 1 -p gpu -x "{node_list}" --gres=gpu:1 --time={slurm_time} --mail-type=FAIL --mail-user=gogna@ipk-gatersleben.de -o {stdout} -e {stderr} --wrap="{script_path_abs}" & \nwait \necho "All scripts Done!"')
+                rsh.write(f'sbatch --auks=yes --job-name={job_name} --mem={mem}G -c 1 -p gpu -x "{node_list}" --gres=gpu:1 --time={slurm_time} --mail-type=FAIL --mail-user={usr}@ipk-gatersleben.de -o {stdout} -e {stderr} --wrap="{script_path_abs}" & \nwait \necho "All scripts Done!"')
         os.system(f'chmod +x {master_script_path}')
         
     ## write master script paths at save_at
