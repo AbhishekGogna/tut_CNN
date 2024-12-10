@@ -1,6 +1,12 @@
 # Add custom functions here to be loaded for all analysis
 from .libs import *
 
+def scale_data(to_transform, pd_cols, pd_index):
+    scaler = MinMaxScaler((0,1))
+    data_scaled = scaler.fit_transform(to_transform)
+    data_scaled_df = pd.DataFrame(data_scaled, columns = pd_cols, index = pd_index)
+    return data_scaled_df, scaler
+
 def inverse_scale(scaler, myyield_tanh, verbose):
     #undo scalling
     myyield_tanh_inv = scaler.inverse_transform(myyield_tanh.reshape(-1, 1))
@@ -14,6 +20,12 @@ def read_pkl(path):
         data = pickle.load(fp)
     return data
 
+def write_pkl(data, path, verbose = False):
+    with open(path, "wb") as fp:   # pickling
+        pickle.dump(data, fp)
+    if verbose:
+        return print("Done")
+    
 def read_json(path):
     with open(path, encoding = "utf8") as json_file:
         data = json.load(json_file)
@@ -122,3 +134,76 @@ def save_model(model, path, model_name = "kibreed_pred"):
     model.save_weights(path + '/' + model_name + ".h5")
     print("Saved model to disk")
     return
+
+## Additional for ravi
+def fit_regression_model(X_log, y):
+    """Fits a linear regression model on log-transformed X and returns the intercept and coefficient."""
+    reg = LinearRegression()
+    reg.fit(X_log, y)
+    return reg.intercept_, reg.coef_[0]
+
+def generate_smooth_line(a, b, X_log):
+    """Generates the smooth line y-values using the linear regression parameters."""
+    return (a + b * X_log).flatten()
+
+def plot_relationship(ax, X, y, 
+                      #y_vals_log, 
+                      max_y, 
+                      max_y_x, 
+                      title, ylabel):
+    """Plots the scatter plot, regression line, max intercept lines, and labels for a given axis."""
+    ax.plot(X, y, 'o', color='blue')
+    #ax.plot(X, y_vals_log, color='red', label=f'Line: y ~ a + b * log(x)')
+    ax.axvline(x=max_y_x, color='green', linestyle='--', label=f'X intercept at {max_y_x:.2f}')
+    ax.axhline(y=max_y, color='purple', linestyle='--', label=f'Y intercept at {max_y:.2f}')
+    ax.set_ylim(0, 1)  # Fix y-axis range from 0 to 1
+    ax.set_xlabel('train_size')
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    ax.legend()
+    
+# Function to extract log times from a single log file (with conversion to hours and Run as first column)
+def extract_log_times(log_file_path):
+    # Extract the run identifier from the file path
+    run_id = re.search(r'run_\d+', log_file_path).group(0)  # Extract run_xx (e.g., run_0)
+
+    with open(log_file_path, 'r') as f:
+        logs = f.readlines()
+
+    # Patterns for extracting the relevant times
+    tuning_time_pattern = re.compile(r"INFO:root:HP tuning took (\d+\.\d+) seconds")
+    fitting_time_pattern = re.compile(r"INFO:root:Model fitting took (\d+\.\d+) seconds")
+
+    # Extracting the times using regex
+    tuning_time_seconds = next((float(tuning_time_pattern.search(line).group(1)) for line in logs if tuning_time_pattern.search(line)), None)
+    fitting_time_seconds = next((float(fitting_time_pattern.search(line).group(1)) for line in logs if fitting_time_pattern.search(line)), None)
+
+    # Convert times from seconds to hours
+    times = {
+        'Run': run_id,
+        'Tuning Complete (hours)': tuning_time_seconds / 3600 if tuning_time_seconds is not None else None,
+        'Fitting Complete (hours)': fitting_time_seconds / 3600 if fitting_time_seconds is not None else None
+    }
+    
+    return times
+
+# Compact function to create DataFrame from multiple log files
+def log_times_to_dataframe(log_file_paths):
+    return pd.DataFrame([extract_log_times(f) for f in log_file_paths])
+
+# Function to train a linear regression model on train_size and Tuning Time
+def train_tuning_model(df):
+    df_clean = df.dropna()
+    # Extract train_size and Tuning Time (in hours)
+    X = df_clean[['train_size']].values  # train_size as feature
+    y = df_clean['Tuning Complete (hours)'].values  # Tuning Time as target
+    
+    # Initialize and fit the model
+    model = LinearRegression()
+    model.fit(X, y)
+    
+    return model
+
+# Function to predict Tuning Time based on train_size
+def predict_tuning_time(model, train_length):
+    return model.predict(np.array([[train_length]]))[0]

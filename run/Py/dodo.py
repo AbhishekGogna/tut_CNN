@@ -30,8 +30,15 @@ input_paths['acr_p.csv'] = f'{res_at}/acr_p.csv'
 input_paths['acr_g.scl'] = f'{res_at}/acr_g.scl'
 input_paths['acr_p.scl'] = f'{res_at}/acr_p.scl'
 
+input_paths['ravi_acr_g.npy'] = f'{res_at}/ravi_acr_g.npy'
+input_paths['ravi_acr_p.csv'] = f'{res_at}/ravi_acr_p.csv'
+input_paths['ravi_acr_g.scl'] = f'{res_at}/ravi_acr_g.scl'
+input_paths['ravi_acr_p.scl'] = f'{res_at}/ravi_acr_p.scl'
+
+
 ## cv scenarios
 input_paths['acr_cv'] = f'{res_at}/acr_cv.json'
+input_paths['ravi_acr_cv'] = f'{res_at}/ravi_acr_cv.json'
 
 ## Dump input files
 if not os.path.exists(res_at):

@@ -1,7 +1,7 @@
 # Add common libraries here to be loaded for all analysis
 
 ## Python build-in
-import os, sys, importlib, inspect, string
+import os, sys, importlib, inspect, string, shutil, warnings
 import time, random, gc, pickle, json, logging, re, math
 
 from os.path import exists
@@ -27,6 +27,7 @@ from datetime import datetime
 ## Predictions
 from sklearn.model_selection import KFold, train_test_split, StratifiedKFold, cross_val_score
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import LinearRegression
 from scipy.stats import pearsonr
 import tensorflow as tf
 from tensorflow.keras.models import Sequential, load_model

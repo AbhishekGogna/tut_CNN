@@ -59,21 +59,25 @@ if gpus:
 if not exists(path_to_pred_file):
 
     # read in data ------------------------------------------------------------------------------------------------------
-    if "acr" in model_name:
-        ## g_a data
-        g_data = np.load(f'{inputs_at}/acr_g.npy')
-        scaler_g_a = read_pkl(f'{inputs_at}/acr_g.scl')
+    schema_files = {
+        "acr_cv": {"g_file": "acr_g.npy", "g_scaler": "acr_g.scl", "p_file": "acr_p.csv", "p_scaler": "acr_p.scl"},
+        "ravi_acr_cv": {"g_file": "ravi_acr_g.npy", "g_scaler": "ravi_acr_g.scl", "p_file": "ravi_acr_p.csv", "p_scaler": "ravi_acr_p.scl"}
+    }
+
+    files = schema_files.get(cv_schema)
+    
+    g_data = np.load(f'{inputs_at}/{files["g_file"]}')
+    scaler_g_a = read_pkl(f'{inputs_at}/{files["g_scaler"]}')
         
-        ## p_data
-        p_data = pd.read_csv(f'{inputs_at}/acr_p.csv')
-        scaler_p = read_pkl(f'{inputs_at}/acr_p.scl')
+    p_data = pd.read_csv(f'{inputs_at}/{files["p_file"]}')
+    scaler_p = read_pkl(f'{inputs_at}/{files["p_scaler"]}')
         
     ## add further information
     p_data["run_idx"] = key
     p_data["model_idx"] = model_name
-    p_data["run_type"] = re.sub(r"(\S+)\.json", r"\1", cv_schema)
+    p_data["run_type"] = cv_schema
     
-    out_cols = ['trait', 'genotype', 'blups_raw', 'std.error', 'dataset', 'type', 
+    out_cols = ['trait', 'genotype', 'blups_raw', 'std.error', 
                 'run_idx', 'model_idx', 'run_type', 'blups_scaled'] # these are the columns that must be in the output
 
     p_data = p_data.loc[:, out_cols]

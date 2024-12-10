@@ -19,7 +19,7 @@ out_paths['pred_dirs_paths'] = f'{save_at}/pred_dirs_paths.json'
 out_paths['master_script_path'] = f'{save_at}/master_script_paths.txt'
 usr = "Gogna" # would need to be modified
 project_name = "tut_CNN" # name of the project at parent_dir
-parent_dir = '/qg-10/data/AGR-QG/{usr}/tutorials'
+parent_dir = f'/qg-10/data/AGR-QG/{usr}/tutorials'
 
 # Produce data ---------------------------------------------------------------------------------------------------------------------
 chunk_1 = '''#!/usr/bin/env bash
@@ -54,6 +54,7 @@ singularity instance stop "${instancename}"
 exit'''
 
 slurm_jobs = [("acr_CNN", "acr_cv"),
+              ("acr_CNN", "ravi_acr_cv"),
               ] # one line about what model to run and with what cv data
 
 slurm_jobs_df = pd.DataFrame(slurm_jobs, columns=["model", "json_file"])
